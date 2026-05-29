@@ -23,7 +23,7 @@
 
     /* SETUP SCREEN */
     #setup-screen {
-      max-width:520px; margin:40px auto; padding:24px 16px;
+      display: none !important;
     }
     .setup-card { background:var(--surface); border-radius:var(--radius); border:1px solid var(--border); box-shadow:var(--shadow); padding:28px; }
     .setup-logo { text-align:center; margin-bottom:20px; }
@@ -340,7 +340,7 @@
 
 <script>
 /* ===== CONFIG ===== */
-let CLIENT_ID = '';
+let CLIENT_ID = '944454900574-fu0ir9ahm6frdv6dcdjsf1m4gih1dj8q.apps.googleusercontent.com';
 let FOLDER_ID = '138F2vsLs7MZzHg3bQK2-Uc1lWGEO-RzT';
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 const FILENAME = 'trip-expenses.json';
@@ -601,14 +601,9 @@ function hideOverlay() { document.getElementById('overlay').classList.remove('sh
 
 /* ===== INIT ===== */
 window.onload = () => {
-  const saved_cid = localStorage.getItem('tripClientId');
-  const saved_fid = localStorage.getItem('tripFolderId');
-  if (saved_cid) { document.getElementById('clientIdInput').value = saved_cid; CLIENT_ID = saved_cid; }
-  if (saved_fid) { document.getElementById('folderIdInput').value = saved_fid; FOLDER_ID = saved_fid; }
-  if (saved_cid) {
-    showOverlay('🔑','กำลังเชื่อมต่อ...');
-    setTimeout(() => { CLIENT_ID = saved_cid; FOLDER_ID = saved_fid; initGoogleAuth(); }, 500);
-  }
+  // Client ID และ Folder ID ฝังไว้แล้ว — เริ่ม login Google ทันที
+  showOverlay('🔑', 'กำลังเชื่อมต่อ Google...');
+  setTimeout(() => { initGoogleAuth(); }, 300);
 };
 document.addEventListener('DOMContentLoaded', () => {
   const inp = document.getElementById('memberName');
